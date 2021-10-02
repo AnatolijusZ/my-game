@@ -1,0 +1,19 @@
+.main-menu {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    margin-bottom: 30%;
+    height: 100%;
+    button {
+        margin: 20px;
+        border-radius: 10px;
+        font-size: 20px;
+    }
+        button:hover {
+            box-shadow: 5px 5px 5px 5px rgba(158,23,23,0.75);
+            -webkit-box-shadow: 5px 5px 5px 5px rgba(158,23,23,0.75);
+            -moz-box-shadow: 5px 5px 5px 5px rgba(158,23,23,0.75);
+        }
+    
+}
