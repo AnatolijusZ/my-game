@@ -5,9 +5,9 @@ import { useRouteMatch } from "react-router";
 function CharCreation() {
      const [character, setCharacter] = useState([]);
      const [nameInput, setNameInput] = useState("");
-     const [str, setStr] = useState("5");
-     const [vit, setVit] = useState("5");
-     const [dex, setDex] = useState("5");
+     const [str, setStr] = useState(5);
+     const [vit, setVit] = useState(5);
+     const [dex, setDex] = useState(5);
 
      //let { path, url } = useRouteMatch();
 
@@ -20,8 +20,12 @@ function CharCreation() {
             vitality: vit,
             dexterity: dex
         }
-
     }
+
+    const strIncrease = () => {
+        setStr(str++)
+    }
+
     const NameInputHandler= (e) => {
         setNameInput(e.target.value)
         };
@@ -29,7 +33,7 @@ function CharCreation() {
         return (<>
             <div className="stats">
             Strength: {str}
-            <button>Increase</button>
+            <button onClick={() => strIncrease()}>Increase</button>
             Vitality: {vit}
             <button>Increase</button>
             Dexterity: {dex}
@@ -37,6 +41,9 @@ function CharCreation() {
             Enter your character name:
             <input type="text" value={nameInput} onChange={NameInputHandler}/>
         </div>
+        {console.log(nameInput)}
+        {console.log(str)}
+    
         </>
     )
 }
