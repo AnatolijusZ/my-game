@@ -2,14 +2,12 @@ import React, {useState} from "react";
 import getId from '../Shared/getId';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-function CharCreation() {
+function CharCreation(props) {
      const [characters, setCharacters] = useState([]);
      const [nameInput, setNameInput] = useState("");
      const [str, setStr] = useState(5);
      const [vit, setVit] = useState(5);
      const [dex, setDex] = useState(5);
-
-     
 
      const newCharacter = () => {
         const player = {
@@ -24,6 +22,9 @@ function CharCreation() {
         setCharacters (charactersCopy);
         localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
      }
+
+
+     
 
     const strIncrease = (id, strength) => {
         const charactersCopy = characters.slice();
@@ -54,7 +55,7 @@ function CharCreation() {
             <input type="text" value={nameInput} onChange={NameInputHandler} />
             <button onClick={() => newCharacter()}>Submit</button>                      
                     <Link to="/main">
-                        <button onClick={() => newCharacter()}>Start adventure</button>
+                        <button >Start adventure</button>
                     </Link>                    
         </div>
         {console.log(nameInput)}
