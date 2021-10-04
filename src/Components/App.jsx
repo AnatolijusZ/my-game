@@ -20,7 +20,7 @@ function App() {
 
                     <Route path={"/create"}>
                         <div className="char-creation-menu">
-                        <CharCreation></CharCreation>
+                        <CharCreation/>
                         </div>
                     </Route>
                 </Switch>
