@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import CreateChar from "./CreateChar";
 import getId from "../Shared/getId";
@@ -9,6 +9,14 @@ function App() {
   const [str, setStr] = useState(5);
   const [vit, setVit] = useState(5);
   const [dex, setDex] = useState(5);
+
+  useEffect(()=> {
+    const charactersCopy = JSON.parse(localStorage.getItem('allCharacters'));
+    if (null === charactersCopy) {
+        return;
+    }
+    setCharacters (charactersCopy);
+},[]);
 
   const newCharacter = () => {
     const player = {
