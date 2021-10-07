@@ -2,58 +2,30 @@ import React, {useState} from "react";
 import getId from '../Shared/getId';
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-function CharCreation(props) {
-     const [characters, setCharacters] = useState([]);
-     const [nameInput, setNameInput] = useState("");
-     const [str, setStr] = useState(5);
-     const [vit, setVit] = useState(5);
-     const [dex, setDex] = useState(5);
-
-     const newCharacter = () => {
-        const player = {
-            id: getId(),
-            name: nameInput,
-            strength: str,
-            vitality: vit,
-            dexterity: dex
-        }
-        const charactersCopy = characters.slice();
-        charactersCopy.push(player);
-        setCharacters (charactersCopy);
-        localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
-     }
+function CreateChar(id, name, str, dex, vit, setName, strInc) {
+ 
+    const [nameInput, setNameInput] = useState("");
 
 
-     
-
-    const strIncrease = (id, strength) => {
-        const charactersCopy = characters.slice();
-            for(let i=0; i<charactersCopy.length; i++) {
-                if (charactersCopy[i].id == id) {
-                    charactersCopy[i].strength++;
-                    break;
-                }
-                
-            }
-            setCharacters (charactersCopy);
-            localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
-    }
 
     const NameInputHandler= (e) => {
         setNameInput(e.target.value)
         };
 
+    
         return (<>
+           
             <div className="stats">
             Strength: {str}
-            <button onClick={() => strIncrease(), console.log(characters.id)}>Increase</button>
+            <button onClick={() => strInc()}>Increase</button>
             Vitality: {vit}
             <button>Increase</button>
             Dexterity: {dex}
             <button>Increase</button>
+
             Enter your character name:
             <input type="text" value={nameInput} onChange={NameInputHandler} />
-            <button onClick={() => newCharacter()}>Submit</button>                      
+            <button onClick={()=> setName(nameInput)}>Submit</button>                      
                     <Link to="/main">
                         <button >Start adventure</button>
                     </Link>                    
@@ -64,4 +36,4 @@ function CharCreation(props) {
         </>
     )
 }
-export default CharCreation;
+export default CreateChar;

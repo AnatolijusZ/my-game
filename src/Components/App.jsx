@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
-import CharCreation from "./CreateChar";
+import CreateChar from "./CreateChar";
 import getId from "../Shared/getId";
 
 
@@ -28,6 +28,33 @@ function App() {
        localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
     }
 
+    
+    const editName =(id, name) => {
+        const charactersCopy = characters.slice();
+        for(let i=0; i<charactersCopy.length; i++) {
+            if(charactersCopy[i].id == id){
+                charactersCopy[i].name = nameInput;
+                break;
+            }
+        }
+        setCharacters (charactersCopy);
+        localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
+    }
+
+        const strIncrease = (id, strength) => {
+            const charactersCopy = characters.slice();
+                for(let i=0; i<charactersCopy.length; i++) {
+                    if (charactersCopy[i].id == id) {
+                        charactersCopy[i].strength++;
+                        break;
+                    }
+                    
+                }
+                setCharacters (charactersCopy);
+                localStorage.setItem('allCharacters', JSON.stringify(charactersCopy));
+        }
+
+    
      
         return (
             <Router>
@@ -35,7 +62,8 @@ function App() {
                     <Route exact path={"/"}>
                     <div className = "main-menu">
                         <Link to="/create"> 
-                        <button  onClick={() => newCharacter(), characters.map(b => <CharCreation key={b.id} name={b.name} str={b.strength} vit={b.vitality} dex={b.dexterity}/> ) }>Create character</button>
+                        <button  onClick={() => newCharacter()}>Create character</button>
+                        {characters.map((character) => <CreateChar key={character.id} id={character.id} str={character.strength} vit={character.vitality} dex={character.dexterity} setName={editName} strInc={strIncrease}/>)} 
                         </Link>
                         <button>Load existing character (not implemented)</button>
                     </div>
@@ -43,7 +71,7 @@ function App() {
 
                     <Route path={"/create"}>
                         <div className="char-creation-menu">
-                        <CharCreation/>
+                        <CreateChar/>
                         </div>
                     </Route>
                 </Switch>
