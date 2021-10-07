@@ -37,8 +37,10 @@ function App() {
   };
 
   const strIncrease = (id, strength) => {
+    console.log("test");
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
+      
       if (charactersCopy[i].id == id) {
         charactersCopy[i].strength++;
         break;

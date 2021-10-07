@@ -2,7 +2,7 @@ import React, { useState } from "react";
 //import getId from '../Shared/getId';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-function CreateChar(id, name, str, dex, vit, setName, strInc) {
+function CreateChar({id, name, str, dex, vit, setName, strInc}) {
   const [nameInput, setNameInput] = useState("");
 
   const NameInputHandler = (e) => {
