@@ -51,7 +51,8 @@ function App() {
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
   };
 
-  const strIncrease = (id, strength) => {
+  const strIncrease = (id, strength, stat) => {
+    if (stat > 0) {
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
       
@@ -63,9 +64,10 @@ function App() {
     }
     setCharacters(charactersCopy);
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  };
+  }};
 
-  const vitIncrease = (id, vitality) => {
+  const vitIncrease = (id, vitality, stat) => {
+    if (stat > 0) {
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
       
@@ -77,9 +79,10 @@ function App() {
     }
     setCharacters(charactersCopy);
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  };
+  }};
 
-  const dexIncrease = (id, dexterity) => {
+  const dexIncrease = (id, dexterity, stat) => {
+    if (stat > 0) {
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
       
@@ -91,9 +94,10 @@ function App() {
     }
     setCharacters(charactersCopy);
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  };
+  }};
   
-  const agiIncrease = (id, agility) => {
+  const agiIncrease = (id, agility, stat) => {
+    if (stat > 0) {
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
       
@@ -105,9 +109,10 @@ function App() {
     }
     setCharacters(charactersCopy);
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  };
+  }};
 
-  const luckIncrease = (id, luck) => {
+  const luckIncrease = (id, luck, stat) => {
+    if (stat > 0) {
     const charactersCopy = characters.slice();
     for (let i = 0; i < charactersCopy.length; i++) {
       
@@ -119,7 +124,7 @@ function App() {
     }
     setCharacters(charactersCopy);
     localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  };
+  }};
 
 
   

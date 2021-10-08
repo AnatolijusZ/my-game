@@ -11,24 +11,28 @@ function CreateChar({id, str, dex, vit, agi, luck, setName, strInc, dexInc, vitI
   };
 
   const statHandler = () => {
-    setStat(stat - 1);
+    if (stat > 0) {
+    setStat(stat - 1)}
+    else {
+      setStat(stat)
+    };
   };
 
   return (
     <>
       <div className="stats">
-      
+
         <span>You have {stat} points remaining</span>
         Strength: {str}
-        <button onClick={() => {strInc(id, str); statHandler();}}>Increase</button>
+        <button onClick={() => {strInc(id, str, stat); statHandler();}}>Increase</button>
         Vitality: {vit}
-        <button onClick={() => {vitInc(id, vit); statHandler();}}>Increase</button>
+        <button onClick={() => {vitInc(id, vit, stat); statHandler();}}>Increase</button>
         Dexterity: {dex}
-        <button onClick={() => {dexInc(id, dex); statHandler();}}>Increase</button>
+        <button onClick={() => {dexInc(id, dex, stat); statHandler();}}>Increase</button>
         Agility: {agi}
-        <button onClick={() => {agiInc(id, agi); statHandler();}}>Increase</button>
+        <button onClick={() => {agiInc(id, agi, stat); statHandler();}}>Increase</button>
         Luck: {luck}
-        <button onClick={() => {luckInc(id, luck); statHandler();}}>Increase</button>
+        <button onClick={() => {luckInc(id, luck, stat); statHandler();}}>Increase</button>
       
 
         Enter your character name:
@@ -38,8 +42,6 @@ function CreateChar({id, str, dex, vit, agi, luck, setName, strInc, dexInc, vitI
           <button>Start adventure</button>
         </Link>
       </div>
-      {console.log(nameInput)}
-      {console.log(vit)}
     </>
   );
 }
