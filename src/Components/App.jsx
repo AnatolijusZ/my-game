@@ -5,33 +5,31 @@ import getId from "../Shared/getId";
 
 function App() {
   const [characters, setCharacters] = useState([]);
-  const [nameInput, setNameInput] = useState("");
   const [str, setStr] = useState(5);
   const [vit, setVit] = useState(5);
   const [dex, setDex] = useState(5);
   const [luck, setLuck] = useState(5);
   const [agi, setAgi] = useState(5);
-  
+  const [nChar, setNChar] = useState();
 
-  
-
-  useEffect(()=> {
-    const charactersCopy = JSON.parse(localStorage.getItem('allCharacters'));
+  useEffect(() => {
+    const charactersCopy = JSON.parse(localStorage.getItem("allCharacters"));
     if (null === charactersCopy) {
-        return;
+      return;
     }
-    setCharacters (charactersCopy);
-},[]);
+    setCharacters(charactersCopy);
+    setNChar(charactersCopy.length);
+  }, []);
 
   const newCharacter = () => {
     const player = {
       id: getId(),
-      name: nameInput,
+      name: "",
       strength: str,
       vitality: vit,
       dexterity: dex,
       agility: agi,
-      luck: luck
+      luck: luck,
     };
     const charactersCopy = characters.slice();
     charactersCopy.push(player);
@@ -53,81 +51,78 @@ function App() {
 
   const strIncrease = (id, strength, stat) => {
     if (stat > 0) {
-    const charactersCopy = characters.slice();
-    for (let i = 0; i < charactersCopy.length; i++) {
-      
-      if (charactersCopy[i].id === id) {
-        charactersCopy[i].strength = strength + 1;
-        setStr(charactersCopy.strength)
-        break;
+      const charactersCopy = characters.slice();
+      for (let i = 0; i < charactersCopy.length; i++) {
+        if (charactersCopy[i].id === id) {
+          charactersCopy[i].strength = strength + 1;
+          setStr(charactersCopy.strength);
+          break;
+        }
       }
+      setCharacters(charactersCopy);
+      localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
     }
-    setCharacters(charactersCopy);
-    localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  }};
+  };
 
   const vitIncrease = (id, vitality, stat) => {
     if (stat > 0) {
-    const charactersCopy = characters.slice();
-    for (let i = 0; i < charactersCopy.length; i++) {
-      
-      if (charactersCopy[i].id === id) {
-        charactersCopy[i].vitality = vitality + 1;
-        setVit(charactersCopy.vitality)
-        break;
+      const charactersCopy = characters.slice();
+      for (let i = 0; i < charactersCopy.length; i++) {
+        if (charactersCopy[i].id === id) {
+          charactersCopy[i].vitality = vitality + 1;
+          setVit(charactersCopy.vitality);
+          break;
+        }
       }
+      setCharacters(charactersCopy);
+      localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
     }
-    setCharacters(charactersCopy);
-    localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  }};
+  };
 
   const dexIncrease = (id, dexterity, stat) => {
     if (stat > 0) {
-    const charactersCopy = characters.slice();
-    for (let i = 0; i < charactersCopy.length; i++) {
-      
-      if (charactersCopy[i].id === id) {
-        charactersCopy[i].dexterity = dexterity + 1;
-        setDex(charactersCopy.dexterity)
-        break;
+      const charactersCopy = characters.slice();
+      for (let i = 0; i < charactersCopy.length; i++) {
+        if (charactersCopy[i].id === id) {
+          charactersCopy[i].dexterity = dexterity + 1;
+          setDex(charactersCopy.dexterity);
+          break;
+        }
       }
+      setCharacters(charactersCopy);
+      localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
     }
-    setCharacters(charactersCopy);
-    localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  }};
-  
+  };
+
   const agiIncrease = (id, agility, stat) => {
     if (stat > 0) {
-    const charactersCopy = characters.slice();
-    for (let i = 0; i < charactersCopy.length; i++) {
-      
-      if (charactersCopy[i].id === id) {
-        charactersCopy[i].agility = agility + 1;
-        setAgi(charactersCopy.agility)
-        break;
+      const charactersCopy = characters.slice();
+      for (let i = 0; i < charactersCopy.length; i++) {
+        if (charactersCopy[i].id === id) {
+          charactersCopy[i].agility = agility + 1;
+          setAgi(charactersCopy.agility);
+          break;
+        }
       }
+      setCharacters(charactersCopy);
+      localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
     }
-    setCharacters(charactersCopy);
-    localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  }};
+  };
 
   const luckIncrease = (id, luck, stat) => {
     if (stat > 0) {
-    const charactersCopy = characters.slice();
-    for (let i = 0; i < charactersCopy.length; i++) {
-      
-      if (charactersCopy[i].id === id) {
-        charactersCopy[i].luck = luck + 1;
-        setLuck(charactersCopy.luck)
-        break;
+      const charactersCopy = characters.slice();
+      for (let i = 0; i < charactersCopy.length; i++) {
+        if (charactersCopy[i].id === id) {
+          charactersCopy[i].luck = luck + 1;
+          setLuck(charactersCopy.luck);
+          break;
+        }
       }
+      setCharacters(charactersCopy);
+      localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
     }
-    setCharacters(charactersCopy);
-    localStorage.setItem("allCharacters", JSON.stringify(charactersCopy));
-  }};
-
-
-  
+  };
 
   return (
     <Router>
@@ -135,7 +130,14 @@ function App() {
         <Route exact path={"/"}>
           <div className="main-menu">
             <Link to="/create">
-              <button onClick={() => newCharacter()}>Create character</button>
+              <button
+                onClick={() => {
+                  newCharacter();
+                  console.log(nChar);
+                }}
+              >
+                Create character
+              </button>
             </Link>
             <button>Load existing character (not implemented)</button>
           </div>
@@ -143,23 +145,28 @@ function App() {
 
         <Route path={"/create"}>
           <div className="char-creation-menu">
-            {characters.length !==0 && characters.map((character) => (
-              <CreateChar
-                key={character.id}
-                id={character.id}
-                str={character.strength}
-                vit={character.vitality}
-                dex={character.dexterity}
-                agi={character.agility}
-                luck={character.luck}
-                setName={editName}
-                strInc={strIncrease}
-                vitInc={vitIncrease}
-                dexInc={dexIncrease}
-                agiInc={agiIncrease}
-                luckInc={luckIncrease}
-              />
-            ))}
+            {characters.length !== 0 &&
+              characters.map((character, i) => {
+                if (i === nChar) {
+                  return (
+                    <CreateChar
+                      key={character.id}
+                      id={character.id}
+                      str={character.strength}
+                      vit={character.vitality}
+                      dex={character.dexterity}
+                      agi={character.agility}
+                      luck={character.luck}
+                      setName={editName}
+                      strInc={strIncrease}
+                      vitInc={vitIncrease}
+                      dexInc={dexIncrease}
+                      agiInc={agiIncrease}
+                      luckInc={luckIncrease}
+                    />
+                  );
+                }
+              })}
           </div>
         </Route>
       </Switch>
